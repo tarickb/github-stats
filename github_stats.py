@@ -73,6 +73,8 @@ class Queries(object):
         :return: deserialized REST JSON output
         """
 
+        print("querying %s" % path)
+
         for _ in range(60):
             headers = {
                 "Authorization": f"token {self.access_token}",
