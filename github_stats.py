@@ -349,6 +349,7 @@ Languages:
 
                 for lang in repo.get("languages", {}).get("edges", []):
                     name = lang.get("node", {}).get("name", "Other")
+                    print("processing lang %s" % name)
                     languages = await self.languages
                     if name.lower() in exclude_langs_lower:
                         continue
