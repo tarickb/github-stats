@@ -506,7 +506,7 @@ Languages:
                     additions += week.get("a", 0)
                     deletions += week.get("d", 0)
                     
-                by_repo[r["name"]] = week.get("a", 0) + week.get("d", 0)
+                by_repo[repo] = week.get("a", 0) + week.get("d", 0)
         print("lines changed by repo: %s" % by_repo)
         self._lines_changed = (by_repo, additions, deletions)
         return self._lines_changed
