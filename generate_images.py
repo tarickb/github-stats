@@ -120,13 +120,13 @@ async def generate_top_repos(s: Stats) -> None:
             print("repo: %s activity: %s color: %s" % (repo, activity, color))
             top_repos += f"""
 <tr style="animation-delay: {i * delay_between}ms">
-<td>{repo}</td>
-<td>
+<td width="50%"><div>{repo}</div></td>
+<td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
 <rect fill="{color}" width="{activity / max_activity * 100.0}%" height="100%"></rect>
 </svg>
 </td>
-<td>{activity}</td>
+<td width="20%"><div>{activity}</div></td>
 </tr>
 """
 
