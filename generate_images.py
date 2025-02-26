@@ -103,16 +103,19 @@ async def generate_top_repos(s: Stats) -> None:
     top_repos = ""
 
     changes_by_repo = (await s.lines_changed)[0]
+    print("changes_by_repo: %s" % changes_by_repo)
     if len(changes_by_repo) > 0:
         sorted_repos = sorted(changes_by_repo.items(), reverse=True, key=lambda t: t[1])
         max_activity = sorted_repos[0][1]
+        print("max_activity: %d" % max_activity)
         # Template only accommodates six.
         sorted_repos = sorted_repos[:6]
+        print("sorted_repos: %s" % sorted_repos)
         delay_between = 150
         for i, (repo, activity) in enumerate(sorted_repos):
             color = data.get("color")
             color = color if color is not None else "#000000"
-            
+            print("repo: %s activity: %s color: %s" % (repo, activity, color))
             top_repos += f"""
 <tr style="animation-delay: {i * delay_between}ms">
 <td>{repo}</td>
@@ -128,7 +131,7 @@ async def generate_top_repos(s: Stats) -> None:
     output = re.sub(r"{{ top_repos }}", top_repos, output)
 
     generate_output_folder()
-    with open("generated/top_reops.svg", "w") as f:
+    with open("generated/top_repos.svg", "w") as f:
         f.write(output)
 
         
