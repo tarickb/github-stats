@@ -305,7 +305,7 @@ Languages:
         forks = 0
         self._languages = dict()
         seen_repos = set()
-        name = None
+        full_name = None
 
         exclude_langs_lower = {x.lower() for x in self._exclude_langs}
 
@@ -319,9 +319,9 @@ Languages:
             )
             raw_results = raw_results if raw_results is not None else {}
 
-            name = raw_results.get("data", {}).get("viewer", {}).get("name", None)
-            if name is None:
-                name = (
+            full_name = raw_results.get("data", {}).get("viewer", {}).get("name", None)
+            if full_name is None:
+                full_name = (
                     raw_results.get("data", {})
                     .get("viewer", {})
                     .get("login", "No Name")
@@ -390,7 +390,7 @@ Languages:
         self._forks = forks
         self._languages = languages
         self._repos = seen_repos
-        self._name = name
+        self._name = full_name
 
     @property
     async def name(self) -> str:
