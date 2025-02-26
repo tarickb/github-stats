@@ -301,10 +301,11 @@ Languages:
         """
         Get lots of summary statistics using one big query. Sets many attributes
         """
-        self._stargazers = 0
-        self._forks = 0
+        stargazers = 0
+        forks = 0
         self._languages = dict()
-        self._repos = set()
+        repos = set()
+        name = None
 
         exclude_langs_lower = {x.lower() for x in self._exclude_langs}
 
@@ -318,9 +319,9 @@ Languages:
             )
             raw_results = raw_results if raw_results is not None else {}
 
-            self._name = raw_results.get("data", {}).get("viewer", {}).get("name", None)
-            if self._name is None:
-                self._name = (
+            name = raw_results.get("data", {}).get("viewer", {}).get("name", None)
+            if name is None:
+                name = (
                     raw_results.get("data", {})
                     .get("viewer", {})
                     .get("login", "No Name")
@@ -344,12 +345,12 @@ Languages:
                 if repo is None:
                     continue
                 name = repo.get("nameWithOwner")
-                if name in self._repos or name in self._exclude_repos:
+                if name in repos or name in self._exclude_repos:
                     continue
-                self._repos.add(name)
+                repos.add(name)
                 print("repo [%s]: %s" % (name, repo))
-                self._stargazers += repo.get("stargazers").get("totalCount", 0)
-                self._forks += repo.get("forkCount", 0)
+                stargazers += repo.get("stargazers").get("totalCount", 0)
+                forks += repo.get("forkCount", 0)
 
                 for lang in repo.get("languages", {}).get("edges", []):
                     name = lang.get("node", {}).get("name", "Other")
@@ -384,6 +385,12 @@ Languages:
         langs_total = sum([v.get("size", 0) for v in self._languages.values()])
         for k, v in self._languages.items():
             v["prop"] = 100 * (v.get("size", 0) / langs_total)
+            
+        self._stargazers = stargazers
+        self._forks = forks
+        self._languages = languages
+        self._repos = repos
+        self._name = name
 
     @property
     async def name(self) -> str:
