@@ -102,7 +102,8 @@ async def generate_top_repos(s: Stats) -> None:
         output = f.read()
 
     top_repos = ""
-    COLORS = random.shuffle(["#3572A5", "#555555", "#3178c6", "#DA3434", "#89e051", "#00ADD8", "#c30e9b", "#427819", "#663399", "#e34c26"])
+    COLORS = ["#3572A5", "#555555", "#3178c6", "#DA3434", "#89e051", "#00ADD8", "#c30e9b", "#427819", "#663399", "#e34c26"]
+    random.shuffle(COLORS)
 
     changes_by_repo = (await s.lines_changed)[0]
     print("changes_by_repo: %s" % changes_by_repo)
