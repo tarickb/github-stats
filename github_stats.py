@@ -304,7 +304,7 @@ Languages:
         stargazers = 0
         forks = 0
         self._languages = dict()
-        repos = set()
+        seen_repos = set()
         name = None
 
         exclude_langs_lower = {x.lower() for x in self._exclude_langs}
@@ -345,9 +345,9 @@ Languages:
                 if repo is None:
                     continue
                 name = repo.get("nameWithOwner")
-                if name in repos or name in self._exclude_repos:
+                if name in seen_repos or name in self._exclude_repos:
                     continue
-                repos.add(name)
+                seen_repos.add(name)
                 print("repo [%s]: %s" % (name, repo))
                 stargazers += repo.get("stargazers").get("totalCount", 0)
                 forks += repo.get("forkCount", 0)
@@ -389,7 +389,7 @@ Languages:
         self._stargazers = stargazers
         self._forks = forks
         self._languages = languages
-        self._repos = repos
+        self._repos = seen_repos
         self._name = name
 
     @property
