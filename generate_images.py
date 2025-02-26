@@ -2,6 +2,7 @@
 
 import asyncio
 import os
+import random
 import re
 
 import aiohttp
@@ -101,6 +102,7 @@ async def generate_top_repos(s: Stats) -> None:
         output = f.read()
 
     top_repos = ""
+    COLORS = random.shuffle(["#3572A5", "#555555", "#3178c6", "#DA3434", "#89e051", "#00ADD8", "#c30e9b", "#427819", "#663399", "#e34c26"])
 
     changes_by_repo = (await s.lines_changed)[0]
     print("changes_by_repo: %s" % changes_by_repo)
@@ -113,8 +115,7 @@ async def generate_top_repos(s: Stats) -> None:
         print("sorted_repos: %s" % sorted_repos)
         delay_between = 150
         for i, (repo, activity) in enumerate(sorted_repos):
-            color = data.get("color")
-            color = color if color is not None else "#000000"
+            color = COLORS[i]
             print("repo: %s activity: %s color: %s" % (repo, activity, color))
             top_repos += f"""
 <tr style="animation-delay: {i * delay_between}ms">
