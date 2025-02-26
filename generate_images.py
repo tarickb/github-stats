@@ -128,6 +128,7 @@ async def generate_top_repos(s: Stats) -> None:
 </tr>
 """
 
+    output = re.sub("{{ name }}", await s.name, output)
     output = re.sub(r"{{ top_repos }}", top_repos, output)
 
     generate_output_folder()
