@@ -502,11 +502,15 @@ Languages:
                 if author != self.username:
                     continue
 
+                week_additions = 0
+                week_deletions = 0
                 for week in author_obj.get("weeks", []):
-                    additions += week.get("a", 0)
-                    deletions += week.get("d", 0)
+                    week_additions += week.get("a", 0)
+                    week_deletions += week.get("d", 0)
                     
-                by_repo[repo] = week.get("a", 0) + week.get("d", 0)
+                by_repo[repo] = week_additions + week_deletions
+                additions += week_additions
+                deletions += week_deletions
         print("lines changed by repo: %s" % by_repo)
         self._lines_changed = (by_repo, additions, deletions)
         return self._lines_changed
