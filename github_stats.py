@@ -73,8 +73,6 @@ class Queries(object):
         :return: deserialized REST JSON output
         """
 
-        print("querying %s" % path)
-
         for _ in range(60):
             headers = {
                 "Authorization": f"token {self.access_token}",
@@ -338,7 +336,6 @@ Languages:
 
             repos = owned_repos.get("nodes", [])
             if not self._ignore_forked_repos:
-                print("considering repo [%s]" % contrib_repos.get("nodes", []).get("nameWithOwner"))
                 repos += contrib_repos.get("nodes", [])
 
             for repo in repos:
@@ -348,13 +345,11 @@ Languages:
                 if name in seen_repos or name in self._exclude_repos:
                     continue
                 seen_repos.add(name)
-                print("repo [%s]: %s" % (name, repo))
                 stargazers += repo.get("stargazers").get("totalCount", 0)
                 forks += repo.get("forkCount", 0)
 
                 for lang in repo.get("languages", {}).get("edges", []):
                     name = lang.get("node", {}).get("name", "Other")
-                    print("repo [%s] lang [%s] size [%d]" % (repo.get("nameWithOwner"), name, lang.get("size", 0)))
                     languages = await self.languages
                     if name.lower() in exclude_langs_lower:
                         continue
@@ -498,18 +493,15 @@ Languages:
         additions = 0
         deletions = 0
         for repo in await self.repos:
-            print("querying %s" % repo)
             r = await self.queries.query_rest(f"/repos/{repo}/stats/contributors")
             for author_obj in r:
                 # Handle malformed response from the API by skipping this repo
                 if not isinstance(author_obj, dict) or not isinstance(
                     author_obj.get("author", {}), dict
                 ):
-                    print("skipping malformed author")
                     continue
                 author = author_obj.get("author", {}).get("login", "")
                 if author != self.username:
-                    print("skipping other author %s" % author)
                     continue
 
                 week_additions = 0
@@ -519,10 +511,8 @@ Languages:
                     week_deletions += week.get("d", 0)
                     
                 by_repo[repo] = week_additions + week_deletions
-                print("repo %s: + %d, - %d", repo, week_additions, week_deletions)
                 additions += week_additions
                 deletions += week_deletions
-        print("lines changed by repo: %s" % by_repo)
         self._lines_changed = (by_repo, additions, deletions)
         return self._lines_changed
 

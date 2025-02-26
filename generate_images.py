@@ -45,8 +45,6 @@ async def generate_overview(s: Stats) -> None:
     output = re.sub("{{ views }}", f"{await s.views:,}", output)
     output = re.sub("{{ repos }}", f"{len(await s.repos):,}", output)
 
-    print("repos: %s" % await s.repos)
-
     generate_output_folder()
     with open("generated/overview.svg", "w") as f:
         f.write(output)
@@ -106,18 +104,14 @@ async def generate_top_repos(s: Stats) -> None:
     random.shuffle(COLORS)
 
     changes_by_repo = (await s.lines_changed)[0]
-    print("changes_by_repo: %s" % changes_by_repo)
     if len(changes_by_repo) > 0:
         sorted_repos = sorted(changes_by_repo.items(), reverse=True, key=lambda t: t[1])
         max_activity = sorted_repos[0][1]
-        print("max_activity: %d" % max_activity)
         # Template only accommodates six.
         sorted_repos = sorted_repos[:6]
-        print("sorted_repos: %s" % sorted_repos)
         delay_between = 150
         for i, (repo, activity) in enumerate(sorted_repos):
             color = COLORS[i]
-            print("repo: %s activity: %s color: %s" % (repo, activity, color))
             top_repos += f"""
 <tr style="animation-delay: {i * delay_between}ms">
 <td width="50%"><div>{repo}</div></td>
