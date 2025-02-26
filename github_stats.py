@@ -273,7 +273,7 @@ class Stats(object):
         self._total_contributions: Optional[int] = None
         self._languages: Optional[Dict[str, Any]] = None
         self._repos: Optional[Set[str]] = None
-        self._lines_changed: Optional[Tuple[int, int]] = None
+        self._lines_changed: Optional[Tuple[Dict[str, int], int, int]] = None
         self._views: Optional[int] = None
 
     async def to_str(self) -> str:
@@ -290,9 +290,9 @@ Stargazers: {await self.stargazers:,}
 Forks: {await self.forks:,}
 All-time contributions: {await self.total_contributions:,}
 Repositories with contributions: {len(await self.repos)}
-Lines of code added: {lines_changed[0]:,}
-Lines of code deleted: {lines_changed[1]:,}
-Lines of code changed: {lines_changed[0] + lines_changed[1]:,}
+Lines of code added: {lines_changed[1]:,}
+Lines of code deleted: {lines_changed[2]:,}
+Lines of code changed: {lines_changed[1] + lines_changed[2]:,}
 Project page views: {await self.views:,}
 Languages:
   - {formatted_languages}"""
@@ -479,13 +479,15 @@ Languages:
             )
         return cast(int, self._total_contributions)
 
+
     @property
-    async def lines_changed(self) -> Tuple[int, int]:
+    async def lines_changed(self) -> Tuple[Dict[str, int], int, int]:
         """
         :return: count of total lines added, removed, or modified by the user
         """
         if self._lines_changed is not None:
             return self._lines_changed
+        by_repo = {}
         additions = 0
         deletions = 0
         for repo in await self.repos:
@@ -503,8 +505,10 @@ Languages:
                 for week in author_obj.get("weeks", []):
                     additions += week.get("a", 0)
                     deletions += week.get("d", 0)
-
-        self._lines_changed = (additions, deletions)
+                    
+                by_repo[r["name"]] = week.get("a", 0) + week.get("d", 0)
+        print("lines changed by repo: %s" % by_repo)
+        self._lines_changed = (by_repo, additions, deletions)
         return self._lines_changed
 
     @property
