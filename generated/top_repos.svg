@@ -96,7 +96,7 @@ tr {
 <td width="50%"><div>tarickb/s3fuse</div></td>
 <td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
-<rect fill="#3178c6" width="100.0%" height="100%"></rect>
+<rect fill="#555555" width="100.0%" height="100%"></rect>
 </svg>
 </td>
 <td width="20%"><div>170901</div></td>
@@ -106,17 +106,17 @@ tr {
 <td width="50%"><div>tarickb/recipes.bedeir.com</div></td>
 <td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
-<rect fill="#c30e9b" width="12.044985108337576%" height="100%"></rect>
+<rect fill="#89e051" width="12.068390471676585%" height="100%"></rect>
 </svg>
 </td>
-<td width="20%"><div>20585</div></td>
+<td width="20%"><div>20625</div></td>
 </tr>
 
 <tr style="animation-delay: 300ms">
 <td width="50%"><div>tarickb/recipes</div></td>
 <td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
-<rect fill="#e34c26" width="9.724928467358295%" height="100%"></rect>
+<rect fill="#3178c6" width="9.724928467358295%" height="100%"></rect>
 </svg>
 </td>
 <td width="20%"><div>16620</div></td>
@@ -126,7 +126,7 @@ tr {
 <td width="50%"><div>tarickb/sasl-xoauth2</div></td>
 <td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
-<rect fill="#00ADD8" width="4.128706093001211%" height="100%"></rect>
+<rect fill="#663399" width="4.128706093001211%" height="100%"></rect>
 </svg>
 </td>
 <td width="20%"><div>7056</div></td>
@@ -136,7 +136,7 @@ tr {
 <td width="50%"><div>tarickb/s3fuse-packages</div></td>
 <td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
-<rect fill="#427819" width="1.4013961299231719%" height="100%"></rect>
+<rect fill="#DA3434" width="1.4013961299231719%" height="100%"></rect>
 </svg>
 </td>
 <td width="20%"><div>2395</div></td>
@@ -146,7 +146,7 @@ tr {
 <td width="50%"><div>tarickb/the-geek-in-the-corner</div></td>
 <td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
-<rect fill="#555555" width="1.1094142222690329%" height="100%"></rect>
+<rect fill="#00ADD8" width="1.1094142222690329%" height="100%"></rect>
 </svg>
 </td>
 <td width="20%"><div>1896</div></td>
