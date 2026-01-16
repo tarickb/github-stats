@@ -96,7 +96,7 @@ tr {
 <td width="50%"><div>tarickb/s3fuse</div></td>
 <td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
-<rect fill="#DA3434" width="100.0%" height="100%"></rect>
+<rect fill="#555555" width="100.0%" height="100%"></rect>
 </svg>
 </td>
 <td width="20%"><div>170901</div></td>
@@ -106,7 +106,7 @@ tr {
 <td width="50%"><div>tarickb/recipes.bedeir.com</div></td>
 <td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
-<rect fill="#3572A5" width="13.80565356551454%" height="100%"></rect>
+<rect fill="#663399" width="13.80565356551454%" height="100%"></rect>
 </svg>
 </td>
 <td width="20%"><div>23594</div></td>
@@ -136,7 +136,7 @@ tr {
 <td width="50%"><div>tarickb/automated-cover-control</div></td>
 <td width="30%">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="10">
-<rect fill="#663399" width="4.103545327411776%" height="100%"></rect>
+<rect fill="#3572A5" width="4.103545327411776%" height="100%"></rect>
 </svg>
 </td>
 <td width="20%"><div>7013</div></td>
